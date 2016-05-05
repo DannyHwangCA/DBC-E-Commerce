@@ -1,0 +1,12 @@
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+
+.centered {
+  position: fixed;
+  top: 12%;
+  left: 25%;
+  margin-top: -50px;
+  margin-left: -100px;
+}

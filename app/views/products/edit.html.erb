@@ -1,0 +1,36 @@
+<h1>Editing product</h1>
+
+<%= form_for :product, url: product_path(@product), method: :put do |f| %>
+
+  <p>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </p>
+
+  <%= f.label :price %>:
+  <%= f.number_field :price, :step => 'any' %><br><br>
+
+  <%= f.label :stock %>:
+  <%= f.number_field :stock %><br><br>
+
+  <p>
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </p>
+
+<ul>
+  <% @all_cats.each do |cat| %>
+    <% if @category_id.include?(cat.id) %>
+      <li><p><%= check_box_tag "product[#{cat.name}]", "#{cat.id}", true %> <%= cat.name %></p></li>
+    <% else %>
+      <li><p><%= check_box_tag "product[#{cat.name}]", "#{cat.id}" %> <%= cat.name %></p></li>
+    <% end %>
+  <% end %>
+</ul>
+
+
+  <p>
+    <%= f.submit %>
+  </p>
+
+<% end %>

@@ -1,0 +1,19 @@
+
+  <div class="row">
+    <% @products.each do |info| %>
+      <div style="text-align:center;" class="col-lg-3 col-md-4 col-sm-6 col-  xs-12">
+        <%= image_tag "money.jpg", class: "img-thumbnail", alt: "image placeholder", data: { src: "holder.js/200x200" }, width: '150', height: '150'%>
+        <h2><%= info.name %></h2>
+        <p><%= info.description %> </p>
+        <p style="color: red; font-size: 20px">$<%= info.price %> - Stock: <%= info.stock %> </p>
+
+        <p>
+        <%= link_to "View details", category_product_path(@category_id, info.id), role: "button", class: "btn btn-default" %>
+        </p>
+      </div><!--/.col-xs-6.col-lg-4-->
+    <% end %>
+  </div><!--/row-->
+
+
+
+
