@@ -10,7 +10,10 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def authorize
-    redirect_to new_session_path unless current_user
+    unless current_user
+      flash[:error] = "you need to login"
+      redirect_to new_session_path
+    end
   end
 
   def check_admin
@@ -19,5 +22,10 @@ class ApplicationController < ActionController::Base
       redirect_to root_url
     end
   end
+
+  def current_user?(user)
+    user.id == current_user.id
+  end
+
 
 end

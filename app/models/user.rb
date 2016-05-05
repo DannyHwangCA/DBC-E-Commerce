@@ -1,4 +1,8 @@
 class User < ActiveRecord::Base
+
+  has_many :carts, dependent: :destroy
+  has_many :products, through: :carts
+
   before_save {self.email.downcase!}
 
   validates :username, presence: true, length: { maximum: 50 }
@@ -10,4 +14,7 @@ class User < ActiveRecord::Base
 
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+
+
+
 end

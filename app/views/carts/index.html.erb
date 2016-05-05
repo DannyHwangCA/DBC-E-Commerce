@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="page-header">
+    <h1>My Shopping Cart</h1>
+  </div>
+  <% if @carts.count > 0 %>
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <% @carts.each do |cart| %>
+        <h3><%= cart.product.name %> qty: <%= cart.quantity %></h3>
+        <div id="cart-button-inline">
+          <div>
+            <%= form_for :carts, url: user_cart_path(current_user.id, cart.id), method: :PUT do |f| %>
+              <%= number_field_tag 'carts[quantity]' %>
+              <%= f.submit "update", class: "btn btn-sm btn-success"  %>
+            <% end %>
+          </div>
+          <div>
+            <%= button_to "remove item", user_cart_path(current_user.id, cart.product_id), class: "btn btn-sm btn-primary", method: :delete %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <% else %>
+  <h2>Shopping cart empty</h2>
+  <p><%= button_to "Browse by category", categories_path, class: "btn btn-lg btn-primary", method: :get %></p>
+  <% end %>
+</div>
