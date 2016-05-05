@@ -5,3 +5,11 @@
 #cart-button-inline div {
   display: inline-block;
 }
+
+#how-much-i-spend {
+  float: right;
+}
+
+#checkout-and-pay-button {
+  float: right;
+}
