@@ -1,0 +1,63 @@
+class CartsController < ApplicationController
+
+  before_action :authorize
+  before_action :correct_user
+
+  def index
+    @carts = @user.carts
+  end
+
+  def create
+    new_item = @user.carts.create(cart_params)
+    if new_item
+      flash[:success] = "Added to shopping cart"
+      redirect_to product_path(new_item.product_id)
+    else
+      flash[:danger] = new_item.errors
+      redirect_to root_url
+    end
+  end
+
+  def update
+    cart = @user.carts.find(params[:id])
+    product = Product.find(cart.product_id)
+    if cart && product
+      if product.stock >= quantity_param['quantity'].to_i
+        # stock_left = product.stock - quantity_param['quantity'].to_i
+        cart.update_attributes(quantity_param)
+        # product.update_attributes(stock: stock_left)
+      else
+        flash[:error] = "Stock on this item is less than your request quantity"
+      end
+      redirect_to user_carts_path(@user.id)
+    else
+      flash[:error] = "cart not found"
+      redirect_to root_url
+    end
+  end
+
+  def destroy
+    product = @user.carts.find(product_id: params[:id])
+    product.destroy
+    redirect_to user_carts_path(@user.id)
+  end
+
+  private
+
+  def cart_params
+    params.require(:cart).permit(:product_id)
+  end
+
+  def quantity_param
+    params.require(:carts).permit(:quantity)
+  end
+
+  def correct_user
+    @user = User.find(params[:user_id])
+    unless current_user?(@user)
+      flash[:error] = 'request perhibited'
+      redirect_to root_url
+    end
+  end
+
+end

@@ -16,10 +16,6 @@ gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
 gem 'bcrypt', '~> 3.1.7'
 
-# gem 'mailgunner', '~> 2.4'
-# gem 'mailgun-ruby', '~>1.0.2'
-# gem 'delayed_job_active_record'
-
 group :development, :test do
   gem 'pry-rails'
   gem 'byebug'
