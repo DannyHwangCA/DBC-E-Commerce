@@ -6,7 +6,11 @@
 
   <%= form_for :carts, url: user_carts_path(current_user.id) do |f| %>
     <%= hidden_field_tag "cart[product_id]", @product.id  %>
-    <%= f.submit "Add to cart" %>
+    <% if @product.stock == 0 %>
+      <input type="submit" value="Add to cart" class="btn btn-success" disabled>
+    <% else %>
+      <%= f.submit "Add to cart", class: "btn btn-success" %>
+    <% end %>
   <% end %>
 </div>
 

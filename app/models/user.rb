@@ -17,8 +17,10 @@ class User < ActiveRecord::Base
 
   def total_spend
     total = 0
-    self.carts.each do |x|
-      total += x.quantity * x.product.price
+    if self.carts.count > 0
+      self.carts.each do |x|
+        total += (x.quantity * x.product.price)
+      end
     end
     total
   end
