@@ -5,4 +5,10 @@ class ExampleMailer < ApplicationMailer
     @user = user
     mail(to: @user.email, subject: "Welcome to the future")
   end
+
+  def order_email(user, collection)
+    @user = user
+    @collection = collection
+    mail(to: @user.email, subject: "Order detail from DBC shoppe")
+  end
 end
