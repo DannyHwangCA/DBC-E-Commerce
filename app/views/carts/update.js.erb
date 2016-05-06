@@ -1,0 +1,15 @@
+$('#cart-display-<%= @cart.id %>').find('h3').text('<%= @cart.product.name %> qty: <%= @cart.quantity %>');
+
+$('#how-much-i-spend').text('total: <%= current_user.total_spend %>');
+
+if ($('div.alert-danger')) {
+  $('div.alert-danger').remove();
+}
+
+<% if flash[:error] %>
+  $(document).find('.my-jumbotron').after('<div class="alert alert-danger"><%= flash[:error] %></div>');
+  <% flash[:error] = nil %>
+<% end %>
+
+$('#number-input-form-<%= @cart.id %>').find('input[type=number]').val('');
+

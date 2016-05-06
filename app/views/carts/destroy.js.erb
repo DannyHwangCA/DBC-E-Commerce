@@ -1,0 +1,4 @@
+<% if @id %>
+  $('#cart-display-<%= @id %>').remove();
+  $('#how-much-i-spend').text('total: <%= current_user.total_spend %>')
+<% end %>

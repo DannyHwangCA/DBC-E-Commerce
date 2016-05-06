@@ -19,27 +19,42 @@ class CartsController < ApplicationController
   end
 
   def update
-    cart = @user.carts.find(params[:id])
-    product = Product.find(cart.product_id)
-    if cart && product
+    @cart = @user.carts.find(params[:id])
+    product = Product.find(@cart.product_id)
+    if @cart && product
       if product.stock >= quantity_param['quantity'].to_i
         # stock_left = product.stock - quantity_param['quantity'].to_i
-        cart.update_attributes(quantity_param)
+        if quantity_param['quantity']
+          @cart.update_attributes(quantity_param)
+        end
         # product.update_attributes(stock: stock_left)
       else
         flash[:error] = "Stock on this item is less than your request quantity"
       end
-      redirect_to user_carts_path(@user.id)
+
+      redirect_link = user_carts_path(@user.id)
     else
       flash[:error] = "cart not found"
-      redirect_to root_url
+      redirect_link = root_url
     end
+
+    respond_to do |format|
+      format.html { redirect_to redirect_link }
+      format.js
+    end
+
   end
 
   def destroy
-    product = @user.carts.find(product_id: params[:id])
-    product.destroy
-    redirect_to user_carts_path(@user.id)
+    cart = @user.carts.find(params[:id])
+    cart.destroy
+    @id = params[:id]
+
+    respond_to do |format|
+      format.html { redirect_to user_carts_path(@user.id) }
+      format.js
+    end
+
   end
 
   private
