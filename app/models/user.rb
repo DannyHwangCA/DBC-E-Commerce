@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-
+  has_many :orders
   has_many :carts, dependent: :destroy
   has_many :products, through: :carts
 
@@ -15,6 +15,12 @@ class User < ActiveRecord::Base
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
-
+  def total_spend
+    total = 0
+    self.carts.each do |x|
+      total += x.quantity * x.product.price
+    end
+    total
+  end
 
 end

@@ -1,0 +1,16 @@
+<div class="container text-center">
+  <div class="page-header">
+    <h1>Shipping Info</h1>
+  </div>
+  <%= form_for :orders, url: user_orders_path(current_user.id) do |f| %>
+
+    <%= f.label :address %>:
+    <%= f.text_field :address %><br><br>
+
+    <%= f.label :phone %>:
+    <%= f.text_field :phone %><p class="text-danger">(optional)</p><br><br>
+
+    <%= f.submit "Place order", class: "btn btn-lg btn-success" %>
+
+  <% end %>
+</div>
