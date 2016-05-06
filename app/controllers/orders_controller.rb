@@ -46,6 +46,7 @@ class OrdersController < ApplicationController
       # destroy things in shopping cart
       @user.carts.each { |item| item.destroy }
       # flash message
+      ExampleMailer.order_email(@user, collection).deliver
       flash[:success] = "Order placed"
     else
       flash[:error] = "Something went wrong, try again"
