@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-
+  has_many :orders
   has_many :carts, dependent: :destroy
   has_many :products, through: :carts
 

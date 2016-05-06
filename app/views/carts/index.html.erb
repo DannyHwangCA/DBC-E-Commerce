@@ -25,7 +25,7 @@
         </div>
       <% end %>
       <hr>
-      <%= button_to "Check out", "#", class: "btn btn-lg btn-success", id: "checkout-and-pay-button" %>
+      <%= button_to "Check out", new_user_order_path(current_user.id), class: "btn btn-lg btn-success", id: "checkout-and-pay-button", method: :get %>
     </div>
   </div>
   <% else %>
