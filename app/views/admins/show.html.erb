@@ -1,17 +1,49 @@
-<h2><%= link_to "Add a category", new_category_path %></h2>
-<h2><%= link_to "Add a product", new_product_path %></h2>
 
-<br>
-  <div class="row">
-    <ul>
+<head>
+  <style type="text/css">
+    .jumbotron.my-jumbotron {
+      display: none;
+    }
+  </style>
+</head>
+
+<div id="sidebar-wrapper">
+  <ul class="sidebar-nav">
+      <li class="sidebar-brand">
+          <a href="#">
+              Start Bootstrap
+          </a>
+      </li>
+
+      <h2 class="admin-sidebar-header">Management</h2>
+
+      <li>
+        <%= link_to "Add a category", new_category_path %>
+      </li>
+
+      <li>
+        <%= link_to "Add a product", new_product_path %>
+      </li>
+
+      <h2 class="admin-sidebar-header">Categories</h2>
+
       <% @categories.each do |cat| %>
-        <li><p><%= link_to cat.name, category_path(cat.id) %></p></li>
+        <li><%= link_to cat.name, category_path(cat.id) %></li>
       <% end %>
-    </ul>
+      <li><%= link_to "other", other_path %></li>
 
+  </ul>
+</div>
+
+
+<div class="container">
+  <div class="jumbotron admin-jumbotron">
+
+  </div>
+  <div class="row">
 
       <% @products.each do |product| %>
-        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+        <div class="col-lg-10">
           <%= image_tag("money.jpg", width: '50', height: '50')%>
           <br>
           <span style="color: red; font-size: 20px">
@@ -27,35 +59,36 @@
         </div>
       <% end %>
   </div>
-         <div class="container">
-          <h1 class="page-header">Administrator Dashboard</h1>
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>Product number</th>
-                  <th>Name</th>
-                  <th>Price</th>
-                  <th>Stock</th>
-                  <th>Description</th>
-                  <th>Edit</th>
-                  <th>Delete</th>
-                </tr>
-              </thead>
-                <% @products.each_with_index do |product, index| %>
-                <tbody>
-                  <tr>
-                    <td><%= index + 1 %></td>
-                    <td><%= product.name%></td>
-                    <td><%= product.price%></td>
-                    <td><%= product.stock%></td>
-                    <td><%= product.description%></td>
-                    <td><%= link_to 'Edit', ""%></td>
-                    <td><%= link_to "delete", "", method: :delete %></td>
-                  </tr>
-                </tbody>
-                <% end %>
-            </table>
-          </div>
-        </div>
+</div>
+<div class="container">
+  <h1 class="page-header">Administrator Dashboard</h1>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Product number</th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Stock</th>
+          <th>Description</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+        <% @products.each_with_index do |product, index| %>
+        <tbody>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td><%= product.name%></td>
+            <td><%= product.price%></td>
+            <td><%= product.stock%></td>
+            <td><%= product.description%></td>
+            <td><%= link_to 'Edit', ""%></td>
+            <td><%= link_to "delete", "", method: :delete %></td>
+          </tr>
+        </tbody>
+        <% end %>
+    </table>
+  </div>
+</div>
 

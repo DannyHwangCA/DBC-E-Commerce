@@ -6,4 +6,8 @@ class AdminsController < ApplicationController
     @products = Product.all
   end
 
+  def other
+    @other_carts = CategoriesProduct.where(category_id: nil)
+  end
+
 end

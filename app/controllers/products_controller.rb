@@ -19,8 +19,12 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
     if @product.valid?
       @product.save
-      cat_params.each do |_, v|
-        @product.categories_products.create(category_id: v.to_i)
+      if cat_params.length > 0
+        cat_params.each do |_, v|
+          @product.categories_products.create(category_id: v.to_i)
+        end
+      else
+        @product.categories_products.create(category_id: nil)
       end
       flash[:success] = "Product Created"
       redirect_to admin_path
