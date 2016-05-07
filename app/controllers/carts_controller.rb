@@ -8,16 +8,20 @@ class CartsController < ApplicationController
   end
 
   def create
-    @user.carts.find()
-
-
-    new_item = @user.carts.create(cart_params)
-    if new_item
+    cart = @user.carts.find_by(cart_params)
+    if cart
+      cart.update_attributes(quantity: cart.quantity + 1)
       flash[:success] = "Added to shopping cart"
-      redirect_to product_path(new_item.product_id)
+      redirect_to product_path(cart.product_id)
     else
-      flash[:danger] = new_item.errors
-      redirect_to root_url
+      new_item = @user.carts.create(cart_params)
+      if new_item
+        flash[:success] = "Added to shopping cart"
+        redirect_to product_path(new_item.product_id)
+      else
+        flash[:danger] = new_item.errors
+        redirect_to root_url
+      end
     end
   end
 
