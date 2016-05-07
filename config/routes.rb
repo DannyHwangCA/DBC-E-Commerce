@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'welcome' => 'static_pages#welcome'
 
   get 'admin' => "admins#show"
+  get 'other' => "admins#other"
 
 
 

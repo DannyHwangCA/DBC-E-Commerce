@@ -1,12 +1,17 @@
-<% if @products.count > 0 %>
-  <div class="row">
-    <% @products.each do |pro| %>
-      <div style="text-align:center;" class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+<div class="container">
+  <div class="page-header">
+    <h1><%= @category.name %></h1>
+  </div>
+  <% if @products.count > 0 %>
+    <div class="row">
+      <% @products.each do |pro| %>
+        <div style="text-align:center;" class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
 
-        <%= link_to image_tag("money.jpg", class: "img-thumbnail", alt: "image placeholder", data: { src: "holder.js/200x200" }, width: '250', height: '250'), product_path(pro.id)%>
+          <%= link_to image_tag("money.jpg", class: "img-thumbnail", alt: "image placeholder", data: { src: "holder.js/200x200" }, width: '250', height: '250'), product_path(pro.id)%>
 
-        <h2><%= pro.name %></h2>
-      </div><!--/.col-xs-6.col-lg-4-->
-    <% end %>
-  </div><!--/row-->
-<% end %>
+          <h2><%= pro.name %></h2>
+        </div><!--/.col-xs-6.col-lg-4-->
+      <% end %>
+    </div><!--/row-->
+  <% end %>
+</div>
