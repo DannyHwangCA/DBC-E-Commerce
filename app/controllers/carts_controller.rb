@@ -8,6 +8,9 @@ class CartsController < ApplicationController
   end
 
   def create
+    @user.carts.find()
+
+
     new_item = @user.carts.create(cart_params)
     if new_item
       flash[:success] = "Added to shopping cart"
