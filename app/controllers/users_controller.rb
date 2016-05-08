@@ -7,7 +7,6 @@ class UsersController < ApplicationController
     user = User.new(user_params)
     if user.valid?
       user.save
-      ExampleMailer.sample_email(user).deliver
       flash[:success] = "User created"
       session[:user_id] = user.id
       redirect_to root_url
