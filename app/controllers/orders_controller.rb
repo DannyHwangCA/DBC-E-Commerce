@@ -1,3 +1,4 @@
+require './app/pdfs/report_pdf.rb'
 class OrdersController < ApplicationController
   before_action :authorize
   before_action :correct_user
@@ -8,6 +9,22 @@ class OrdersController < ApplicationController
   def create
     place_orders
   end
+
+  def show
+    @order = @user.orders.find_by(id: params[:id].to_i)
+
+    # Prawn pdf response
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = ReportPdf.new(@order, @user)
+        send_data pdf.render, filename: "user#{@user.id}.pdf", type: 'application/pdf'
+      end
+    end
+
+  end
+
 
   private
   def order_params

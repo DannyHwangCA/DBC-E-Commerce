@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="page-header">
+    <h1>Hi <%= @user.username %></h1>
+  </div>
+  <h2>
+    <span>Than you for shopping with us, here is your order detail</span>
+  </h2>
+
+  <div class="row">
+
+    <div class="col-lg-3">
+        <%= image_tag("money.jpg", class: "img-thumbnail", alt: "image placeholder", data: { src: "holder.js/200x200" }, width: '200', height: '200')%>
+    </div>
+
+    <div class="col-lg-3">
+      <blockquote class="blockquote">
+        <p>product name: <%= @order.product.name %></p>
+        <p>total: <%= @order.total %></p>
+        <p>quantity: <%= @order.quantity %></p>
+        <p>address: <%= @order.address %></p>
+        <p>phone: <%= @order.phone %></p>
+      </blockquote>
+
+    </div>
+
+  </div>
+</div>
+
+
+
+
