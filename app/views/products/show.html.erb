@@ -3,15 +3,19 @@
   <p>Price: <%= @product.price %></p>
   <p>Stock: <%= @product.stock %></p>
   <p>Description: <%= @product.description %></p>
-
-  <%= form_for :carts, url: user_carts_path(current_user.id) do |f| %>
-    <%= hidden_field_tag "cart[product_id]", @product.id  %>
-    <% if @product.stock == 0 %>
-      <input type="submit" value="Add to cart" class="btn btn-success" disabled>
-    <% else %>
-      <%= f.submit "Add to cart", class: "btn btn-success" %>
+  <% if current_user %>
+    <%= form_for :carts, url: user_carts_path(current_user.id) do |f| %>
+      <%= hidden_field_tag "cart[product_id]", @product.id  %>
+      <% if @product.stock == 0 %>
+        <input type="submit" value="Add to cart" class="btn btn-success" disabled>
+      <% else %>
+        <%= f.submit "Add to cart", class: "btn btn-success" %>
+      <% end %>
     <% end %>
+  <% else %>
+    <%= button_to "Add to cart", new_session_path, class: 'btn btn-success', method: :get %>
   <% end %>
+
 </div>
 
 
